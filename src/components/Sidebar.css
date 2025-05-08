@@ -1,0 +1,22 @@
+.nav-link .nav-item {
+    padding: 8px 12px;
+    border-radius: 6px;
+    color: #939591;
+    transition: all 0.3s ease;
+  }
+  
+  .nav-link .nav-item:hover {
+    background-color: #00bf63;
+    color: white;
+    cursor: pointer;
+  }
+  
+  .active-link {
+    background-color: #00bf63;
+    color: white !important;
+    font-weight: 500;
+  }
+p{
+    color: #939591;
+    font-size: 0.8rem
+}

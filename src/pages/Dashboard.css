@@ -1,0 +1,17 @@
+#box {
+    background: linear-gradient(to right, #54BBCA, #A4E58F);
+    padding: 2px;
+    border-radius: 10px;
+    display: inline-block;
+    width: 100%;
+    max-width: 100%;
+
+}
+
+#innerBox {
+    background-color: #F0FFFA;
+    border-radius: 8px;
+    padding: 20px;
+    width: 100%;
+    max-width: 100%;
+}

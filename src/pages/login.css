@@ -1,0 +1,33 @@
+#main {
+    border-radius: 8px;
+    background: linear-gradient(to right,  #54BBCA, #A4E58F);
+    padding: 2px;
+}
+
+#main>div {
+    background: #F0FFFA;
+    border-radius: 6px;
+    padding: 10vh 0px;
+    width: 100%;
+    height: 100%;
+}
+
+#loginDiv{
+    border-radius: 8px;
+    background: linear-gradient(to right,  #54BBCA, #A4E58F);
+    padding: 2px;
+}
+form{
+    background: white;
+    border-radius: 6px;
+    width: 100%;
+    height: 100%;
+
+}
+#input{
+    border: 1.5px solid rgb(9, 192, 9);
+}
+#rememberMe{
+    border: 1px solid black;
+}
+  

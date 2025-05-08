@@ -1,0 +1,30 @@
+
+form{
+    background-color:  #F0FFFA;
+}
+#out {
+    background: linear-gradient(to right, #64D69E, #ECEAD0);
+    padding: 1px;
+    border-radius: 5px;
+    display: inline-block;
+    width: 100%;
+    max-width: 100%;
+
+}
+
+#inn {
+    background-color: #F0FFFA;
+    border-radius: 5px;
+    width: 100%;
+    max-width: 100%;
+}
+
+#inn-card {
+    background-color: #FEFEFE;
+    border-radius: 5px;
+    width: 100%;
+    max-width: 100%;
+}
+
+
+
