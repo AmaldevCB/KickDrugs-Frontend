@@ -20,3 +20,50 @@ p{
     color: #939591;
     font-size: 0.8rem
 }
+
+@media (max-width: 768px) {
+  #sidebarMenu {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 250px; /* sidebar width */
+    background-color: #F7FFEF;
+    z-index: 1050; /* above main content */
+    transform: translateX(-100%);
+    transition: transform 0.3s ease-in-out;
+    overflow-y: auto;
+  }
+
+  #sidebarMenu.show {
+    transform: translateX(0);
+  }
+
+  /* Add a semi-transparent overlay behind sidebar */
+  #sidebarOverlay {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100vw; height: 100vh;
+    background-color: rgba(0,0,0,0.4);
+    z-index: 1040;
+    display: none;
+  }
+
+  #sidebarOverlay.show {
+    display: block;
+  }
+}
+
+/* On larger screens, keep sidebar static */
+@media (min-width: 769px) {
+  #sidebarMenu {
+    position: static;
+    transform: none !important;
+    width: 100%;
+    height: auto;
+    overflow: visible;
+  }
+  #sidebarOverlay {
+    display: none !important;
+  }
+}

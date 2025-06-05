@@ -15,3 +15,63 @@
     width: 100%;
     max-width: 100%;
 }
+.recharts-wrapper:focus,
+.recharts-wrapper *:focus,
+.recharts-surface:focus,
+.recharts-surface *:focus,
+.recharts-responsive-container:focus,
+.recharts-responsive-container *:focus,
+svg:focus {
+  outline: none !important;
+  border: none !important;
+}
+
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 250px;
+  background-color: #f7ffef;
+  overflow-y: auto;
+  transition: transform 0.3s ease-in-out;
+  z-index: 1030;
+}
+
+
+/* Sidebar base style */
+#sidebarMenu {
+  background-color: #F7FFEF;
+  height: 100vh;
+  overflow-y: auto;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 250px;
+  z-index: 1050;
+  padding: 1rem;
+  transition: transform 0.3s ease;
+}
+
+/* On desktop: static position */
+@media (min-width: 768px) {
+  #sidebarMenu {
+    position: static !important;
+    width: 100%;
+    height: auto;
+    padding: 0;
+    transform: none !important;
+  }
+}
+
+/* When collapsed on mobile (hidden) */
+#sidebarMenu.collapse:not(.show) {
+  transform: translateX(-100%);
+}
+
+/* When expanded on mobile */
+#sidebarMenu.collapse.show {
+  transform: translateX(0);
+  box-shadow: 2px 0 5px rgba(0,0,0,0.3);
+}
+

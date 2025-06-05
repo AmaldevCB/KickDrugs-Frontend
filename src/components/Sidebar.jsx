@@ -7,7 +7,6 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import logo from '../assets/logo.png';
 import './Sidebar.css';
-import { faXmark } from '@fortawesome/free-solid-svg-icons/faXmark';
 import { logout } from '../services/commonFunctions';
 
 function Sidebar() {
@@ -16,21 +15,10 @@ function Sidebar() {
     const isActive = (path) => location.pathname === path;
 
     return (
-        <div className="p-3 w-100" style={{ backgroundColor: "#F7FFEF" }}>
+        <div id='sidebarMenu' className="p-3 w-100" style={{ backgroundColor: "#F7FFEF" }}>
             <div className="d-flex justify-content-between">
-            <img src={logo} alt="Logo" width={"100vh"} />
-
-                <button
-                    className="btn btn-outline-dark d-md-none"
-                    type="button"
-                    data-bs-toggle="collapse"
-                    data-bs-target="#sidebarMenu"
-                    aria-controls="sidebarMenu"
-                    aria-expanded="false"
-                    aria-label="Toggle sidebar"
-                >
-                    <FontAwesomeIcon icon={faXmark} />
-                </button>
+                <a href="/dashboard"><img src={logo} alt="Logo" width={"100vh"} /></a>
+                
             </div>
             <ul className="nav flex-column mt-5">
                 <Link to="/dashboard" className='nav-link'>
@@ -81,7 +69,7 @@ function Sidebar() {
                         <FontAwesomeIcon icon={faGear} className="me-2" /> Settings
                     </li>
                 </Link>
-                <button onClick={()=>logout(navigate)} className='nav-link'>
+                <button onClick={() => logout(navigate)} className='nav-link'>
                     <li className={`nav-item rounded ${isActive('/logout') ? 'active-link' : ''}`}>
                         <FontAwesomeIcon icon={faArrowRightFromBracket} className="me-2" /> Logout
                     </li>

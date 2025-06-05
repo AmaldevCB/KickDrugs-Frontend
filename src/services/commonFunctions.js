@@ -1,4 +1,6 @@
+import axios from "axios";
 import Swal from "sweetalert2";
+import { serverUrl } from "./serverUrl";
 
 export const logout = (navigate) => {
 
@@ -14,8 +16,14 @@ export const logout = (navigate) => {
         cancelButtonColor: 'green'
     }).then((result) => {
         if (result.isConfirmed) {
-            sessionStorage.removeItem("token")
-            navigate('/')
+           axios.get(`${serverUrl}/logout`, { withCredentials: true })
+                .then(() => {
+                    sessionStorage.removeItem("token");
+                    navigate('/');
+                })
+                .catch(() => {
+                    Swal.fire('Error', 'Logout failed', 'error');
+                })
         }
     })
 };

@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import Sidebar from '../components/Sidebar'
 import { faBars, faBell, faCircleUser } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -7,36 +7,42 @@ import './Dashboard.css'
 import { useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import { logout } from '../services/commonFunctions'
+import axios from 'axios'
+import { serverUrl } from '../services/serverUrl'
 
 function Dashboard() {
     const navigate = useNavigate()
 
     useEffect(()=>{
-        const token = sessionStorage.getItem('token');   
-        if(!token){
-            toast.error('Login for access')
-            navigate('/')
-        } 
-    },[])
+       axios.get(`${serverUrl}/dashboard`, { withCredentials: true })
+      .then(() => {})
+      .catch(() => {
+        toast.error('Login required for access');
+        navigate('/');
+      });
+    },[navigate])
     return (
         <>
             <div className="row">
                 <div className="col-md-2 p-0">
-                    <div className="collapse d-md-block" id="sidebarMenu">
+                    <div className="collapse d-md-none" id="sidebarMenu">
+                        <Sidebar />
+                    </div>
+                    <div className="d-none d-md-block">
                         <Sidebar />
                     </div>
                 </div>
                 <div className="col px-5">
                     <div className="d-flex justify-content-between  mt-4">
                         <div className="">
-                            <h3>Hi, User!</h3>
+                            <h3>Hi, Admin</h3>
                         </div>
                         <div className=" d-flex align-items-center">
                             <FontAwesomeIcon className='fs-4 text-secondary ' icon={faBell} />
                             <FontAwesomeIcon className='text-success fs-4 ms-2 ' icon={faCircleUser} />
                             <div class="dropdown">
                                 <button class="btn dropdown-toggle " type="button" id="loginSignupDropdown" data-bs-toggle="dropdown" aria-expanded="false">
-                                    User
+                                    Admin
                                 </button>
                                 <ul class="dropdown-menu" aria-labelledby="loginSignupDropdown">
                                     <li  onClick={()=>logout(navigate)}><a class="dropdown-item">Logout</a></li>
@@ -64,6 +70,10 @@ function Dashboard() {
                     </div>
                 </div>
             </div>
+            <footer className='container'>
+                <hr />
+                <p className='text-center fst-italic text-primary'>Designed and Developed By Penoft Technologies</p>
+            </footer>
         </>
     )
 }

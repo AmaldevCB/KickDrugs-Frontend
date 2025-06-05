@@ -1,38 +1,50 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './login.css';
 import Header from '../components/Header';
 import { useNavigate } from 'react-router-dom';
 import { adminLoginApi } from '../services/allApi';
 import { toast } from 'react-toastify';
+import { serverUrl } from '../services/serverUrl';
+import axios from 'axios';
 
 function Login() {
     const navigate = useNavigate()
     const [userDetails, setUserDetails] = useState({
         username: "",
         password: "",
-        role: ""
+        role: "",
+        remember: false
     })
     console.log(userDetails);
     const handleAdminLogin = async (e) => {
         e.preventDefault()
         if (!userDetails.username || !userDetails.password || !userDetails.role) {
             alert('Please fill in all fields')
+            return
         }
         else {
             const result = await adminLoginApi(userDetails)
             console.log(result);
             if (result.status == 200) {
                 toast.success('Administrator logged in');
-                sessionStorage.setItem("token", result.data)
-                navigate('/dashboard')
+                navigate('/dashboard', { replace: true });
             } else if (result.status == 401) {
-                toast.warning('Wrong Password');
-            } else {
+                toast.warning('Wrong Email/Password');
+            }
+            else {
                 toast.error('Something went wrong');
             }
         }
     }
-
+    useEffect(() => {
+        axios.get(`${serverUrl}/dashboard`, { withCredentials: true })
+            .then(() => {
+                navigate('/dashboard', { replace: true }); // already logged in, redirect
+            })
+            .catch(() => {
+                // Not logged in, stay on login
+            });
+    }, [navigate]);
     return (
         <>
             <Header />
@@ -43,7 +55,7 @@ function Login() {
                             <h4 className="fw-bold mt-2 mb-3">Admin Login</h4>
 
                             <div className="mb-3">
-                                <input required onChange={(e) => setUserDetails({ ...userDetails, username: e.target.value })} value={userDetails.username} type="text" id='input' className="form-control" placeholder="Enter Email ID/username" />
+                                <input required onChange={(e) => setUserDetails({ ...userDetails, username: e.target.value })} value={userDetails.username} type="email" id='input' className="form-control" placeholder="Enter Email ID/username" />
                             </div>
 
                             <div className="mb-3">
@@ -60,10 +72,10 @@ function Login() {
 
                             <div className="mb-3 d-flex justify-content-between">
                                 <div className="form-check" >
-                                    <input className="form-check-input" type="checkbox" id="rememberMe" />
+                                    <input className="form-check-input" type="checkbox" id="rememberMe" checked={userDetails.remember} onChange={(e) => setUserDetails({ ...userDetails, remember: e.target.value })} />
                                     <label className="form-check-label" htmlFor="rememberMe">Remember Me</label>
                                 </div>
-                                <a href="#" className="text-danger small">Forgot Password?</a>
+                                <a href="/forgotPassword" className="text-danger small">Forgot Password?</a>
                             </div>
 
                             <button type='submit' className="btn btn-success w-100">Login</button>
@@ -71,6 +83,10 @@ function Login() {
                     </div>
                 </div>
             </div>
+            <footer className='container'>
+                <hr />
+                <p className='text-center fst-italic text-primary'>Designed and Developed By Penoft Technologies</p>
+            </footer>
         </>
     );
 }
