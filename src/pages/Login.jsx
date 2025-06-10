@@ -75,7 +75,7 @@ function Login() {
                                     <input className="form-check-input" type="checkbox" id="rememberMe" checked={userDetails.remember} onChange={(e) => setUserDetails({ ...userDetails, remember: e.target.value })} />
                                     <label className="form-check-label" htmlFor="rememberMe">Remember Me</label>
                                 </div>
-                                <a href="/forgotPassword" className="text-danger small">Forgot Password?</a>
+                                <Link to="/forgotPassword" className="text-danger small">Forgot Password?</Link>
                             </div>
 
                             <button type='submit' className="btn btn-success w-100">Login</button>
