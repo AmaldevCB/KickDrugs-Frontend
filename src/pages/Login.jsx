@@ -16,26 +16,31 @@ function Login() {
         remember: false
     })
     console.log(userDetails);
-    const handleAdminLogin = async (e) => {
-        e.preventDefault()
-        if (!userDetails.username || !userDetails.password || !userDetails.role) {
-            alert('Please fill in all fields')
-            return
-        }
-        else {
-            const result = await adminLoginApi(userDetails)
-            console.log(result);
-            if (result.status == 200) {
-                toast.success('Administrator logged in');
-                navigate('/dashboard', { replace: true });
-            } else if (result.status == 401) {
-                toast.warning('Wrong Email/Password');
-            }
-            else {
-                toast.error('Something went wrong');
-            }
-        }
+   const handleAdminLogin = async (e) => {
+    e.preventDefault();
+    if (!userDetails.username || !userDetails.password || !userDetails.role) {
+        toast.warning('Please fill the details completly');
+        return;
     }
+
+    try {
+        const result = await adminLoginApi(userDetails);
+        console.log(result);
+
+        if (result.status === 200) {
+            toast.success('Administrator logged in');
+            navigate('/dashboard', { replace: true });
+        } else if (result.status === 401) {
+            toast.warning('Wrong Email/Password');
+        } else {
+            toast.error('Something went wrong');
+        }
+    } catch (error) {
+        console.error("Login Error:", error);  // <--- See what actually failed
+        toast.error('Login failed: ' + (error.response?.data?.message || error.message));
+    }
+};
+
     useEffect(() => {
         axios.get(`${serverUrl}/dashboard`, { withCredentials: true })
             .then(() => {
