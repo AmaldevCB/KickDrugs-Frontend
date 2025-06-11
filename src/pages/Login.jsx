@@ -37,7 +37,7 @@ function Login() {
             toast.error('Something went wrong');
         }
     } catch (error) {
-        console.error("Login Error:", error);  // <--- See what actually failed
+        console.error("Login Error:", error);  
         toast.error('Login failed: ' + (error.response?.data?.message || error.message));
     }
 };
@@ -45,10 +45,9 @@ function Login() {
     useEffect(() => {
         axios.get(`${serverUrl}/dashboard`, { withCredentials: true })
             .then(() => {
-                navigate('/dashboard', { replace: true }); // already logged in, redirect
+                navigate('/dashboard', { replace: true }); 
             })
             .catch(() => {
-                // Not logged in, stay on login
             });
     }, [navigate]);
     return (
