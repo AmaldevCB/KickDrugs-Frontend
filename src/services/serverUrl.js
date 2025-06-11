@@ -1,1 +1,4 @@
-export const serverUrl = 'http://localhost:4000'
+
+
+export const serverUrl = 'https://kickdrugs-backend-1.onrender.com'
+
